@@ -1,0 +1,15 @@
+{
+    "PREFIX": ["+", "%f", "a!"],
+    "TOKEN": "your_token_here",
+    "api_link": "api_link_here",
+    "char_link": "link_here",
+    "item_link": "item_link_here",
+    "s_link": "link_here",
+    "sw_link": "link_here",
+    "toggle_link": "link_here",
+    "sle_link": "link_here",
+    "toggle2_link": "link_here",
+    "type_link": "link_here",
+    "bg_link": "link_here",
+    "ar_link": "link_here"
+}
