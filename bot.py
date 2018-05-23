@@ -95,7 +95,7 @@ class NewBot(commands.Bot):
         '''Ignore commands by self'''
         if message.author.id == self.user.id:
             return
-        if 'discord.gg' in message.content:
+        '''if 'discord.gg' in message.content:
             if message.guild.id == 448203137698889730 and message.channel.id != 448218147183656961:
                 try:
                     await asyncio.sleep(2)
@@ -105,7 +105,7 @@ class NewBot(commands.Bot):
                     await asyncio.sleep(20)
                     await alert.delete()
                 except Exception as e:
-                    pass
+                    pass'''
         await self.process_commands(message)
 
     def get_server(self, id):
