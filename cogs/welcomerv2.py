@@ -416,7 +416,7 @@ class Welcomer:
                         new_im.paste(img,(42,65))
                         font1 = ImageFont.truetype('arialbd.ttf', 25)
                         #font2 = ImageFont.truetype('Pacifico.ttf',20)
-                        font2 = ImageFont.truetype('Xpressive Regular.ttf',20)
+                        font2 = ImageFont.truetype('Homer_Simpson_Revised.ttf',24)
                         font3 = ImageFont.truetype('Tabitha.ttf', 22)
                         xoff, yoff = (10,5)
                         d = ImageDraw.Draw(new_im)
@@ -430,7 +430,7 @@ class Welcomer:
                         else:
                             msg = data_message["{}".format(server.id)]["msg"]
                         #m.text((136, 80),"{}".format(msg), fill="white",font = font2)
-                        m.text((136, 85),"{}".format(msg), fill="white",font = font2)
+                        m.text((136, 86),"{}".format(msg), fill="white",font = font2)
                         kk = ImageDraw.Draw(new_im)
                         kk.text((137, 109),"Member Number: 1", fill="white",font = font2)
                         if is_bot == True:
@@ -507,7 +507,7 @@ class Welcomer:
                             img.thumbnail((75,75))
                             new_im.paste(img,(42,65))
                             font1 = ImageFont.truetype('arialbd.ttf', 25)
-                            font2 = ImageFont.truetype('Xpressive Regular.ttf',20)
+                            font2 = ImageFont.truetype('Homer_Simpson_Revised.ttf',24)
                             font3 = ImageFont.truetype('Tabitha.ttf', 22)
                             xoff, yoff = (10,5)
                             d = ImageDraw.Draw(new_im)
@@ -520,7 +520,7 @@ class Welcomer:
                                 msg = "Have Fun and Enjoy your time in here!"
                             else:
                                 msg = data_message["{}".format(server)]["msg"]
-                            m.text((136, 85),"{}".format(msg), fill="white",font = font2)
+                            m.text((136, 86),"{}".format(msg), fill="white",font = font2)
                             kk = ImageDraw.Draw(new_im)
                             kk.text((137, 109),"Member Number: 1", fill="white",font = font2)
                             if is_bot == True:
@@ -612,7 +612,7 @@ class Welcomer:
                 img.thumbnail((75,75))
                 new_im.paste(img,(42,65))
                 font1 = ImageFont.truetype('arialbd.ttf', 25)
-                font2 = ImageFont.truetype('Xpressive Regular.ttf',20)
+                font2 = ImageFont.truetype('Homer_Simpson_Revised.ttf',24)
                 font3 = ImageFont.truetype('Tabitha.ttf', 22)
                 xoff, yoff = (10,5)
                 d = ImageDraw.Draw(new_im)
@@ -625,7 +625,7 @@ class Welcomer:
                     msg = "Have Fun and Enjoy your time in here!"
                 else:
                     msg = data_message["{}".format(server.id)]["msg"]
-                m.text((136, 85),"{}".format(msg), fill="white",font = font2)
+                m.text((136, 86),"{}".format(msg), fill="white",font = font2)
                 kk = ImageDraw.Draw(new_im)
                 kk.text((137, 109),"Member Number: {}".format(member_number), fill="white",font = font2)
                 if is_bot == True:
