@@ -71,6 +71,88 @@ class EventLog:
             channel_id = 448873236290207744
             channel = self.bot.get_channel(channel_id)
             await channel.send(embed = em)
+        if before.roles != after.roles:
+            em =discord.Embed(color = 0xffd500)
+            em.set_author(name = "Member Role Updated", icon_url = "https://image.ibb.co/jmajRT/Federation.png")
+            em.add_field(name = "User:", value = f"Name: {before}", inline = False)
+            r = [x.name for x in before.roles]
+            em.add_field(name = "Old Roles ", value = f"```{r}```", inline = False)
+            r1 = [x.name for x in after.roles]
+            em.add_field(name = "New Roles:", value = f"```{r1}```", inline = False)
+            em.set_thumbnail(url = before.avatar_url)
+            em.set_footer(text = "|Federation|",icon_url = self.bot.user.avatar_url)
+            channel_id = 448873236290207744
+            channel = self.bot.get_channel(channel_id)
+            await channel.send(embed = em)
+
+
+    async def on_member_ban(self, guild, user):
+        '''Ban event'''
+        em =discord.Embed(color = 0xffd500)
+        em.set_author(name = "Member banned:", icon_url = "https://image.ibb.co/jmajRT/Federation.png")
+        em.add_field(name = "User:", value = f"{user}")
+        em.set_thumbnail(url = user.avatar_url)
+        em.set_footer(text = "|Federation|",icon_url = self.bot.user.avatar_url)
+        channel_id = 448873236290207744
+        channel = self.bot.get_channel(channel_id)
+        await channel.send(embed = em)
+
+    async def on_member_unban(self, guild, user):
+        '''UnBan event'''
+        em =discord.Embed(color = 0xffd500)
+        em.set_author(name = "Member unbanned:", icon_url = "https://image.ibb.co/jmajRT/Federation.png")
+        em.add_field(name = "User:", value = f"{user}")
+        em.set_thumbnail(url = user.avatar_url)
+        em.set_footer(text = "|Federation|",icon_url = self.bot.user.avatar_url)
+        channel_id = 448873236290207744
+        channel = self.bot.get_channel(channel_id)
+        await channel.send(embed = em)
+
+    async def on_guild_role_create(self, role):
+        '''Role created'''
+        em =discord.Embed(color = 0xffd500)
+        em.set_author(name = "Role Created:", icon_url = "https://image.ibb.co/jmajRT/Federation.png")
+        em.add_field(name = "Name:", value = f"{role.name}", inline = False)
+        perm = [x for x in role.permissions]
+        em.add_field(name = "Name:", value = f"{perm}",inline = False)
+        em.set_footer(text = "|Federation|",icon_url = self.bot.user.avatar_url)
+        channel_id = 448873236290207744
+        channel = self.bot.get_channel(channel_id)
+        await channel.send(embed = em)
+
+    async def on_guild_role_delete(self, role):
+        '''Role deleted'''
+        em =discord.Embed(color = 0xffd500)
+        em.set_author(name = "Role Deleted:", icon_url = "https://image.ibb.co/jmajRT/Federation.png")
+        em.add_field(name = "Name:", value = f"{role.name }")
+        em.set_footer(text = "|Federation|",icon_url = self.bot.user.avatar_url)
+        channel_id = 448873236290207744
+        channel = self.bot.get_channel(channel_id)
+        await channel.send(embed = em)
+
+    async def on_guild_role_update(self, before,after):
+        '''Role update'''
+        em =discord.Embed(color = 0xffd500)
+        em.set_author(name = "Role Updated:", icon_url = "https://image.ibb.co/jmajRT/Federation.png")
+        em.add_field(name = "Old Name:", value = f"{before.name}", inline = False)
+        perm = [x for x in before.permissions]
+        em.add_field(name = "Old Permissions:",value = f"```{perm}```", inline = False)
+        em.add_field(name = "New Name:",value = f"{after.name}", inline = False)
+        perm2 = [x for x in after.permissions]
+        em.add_field(name = "New Permissions:",value = f"```{perm2}```", inline =  False)
+        em.set_footer(text = "|Federation|",icon_url = self.bot.user.avatar_url)
+        channel_id = 448873236290207744
+        channel = self.bot.get_channel(channel_id)
+        await channel.send(embed = em)
+
+    async def on_member_join(self, member):
+        '''member removed'''
+        em =discord.Embed(color = 0xffd500)
+        em.set_author(name = "Member Left:", icon_url = "https://image.ibb.co/jmajRT/Federation.png")
+        em.add_field(name = "Member:", value = f"{member}")
+        channel_id = 448873236290207744
+        channel = self.bot.get_channel(channel_id)
+        await channel.send(embed = em)
 
 def setup(bot):
     bot.add_cog(EventLog(bot))
