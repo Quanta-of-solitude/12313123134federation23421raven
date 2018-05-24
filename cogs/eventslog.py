@@ -114,7 +114,7 @@ class EventLog:
         em.set_author(name = "Role Created:", icon_url = "https://image.ibb.co/jmajRT/Federation.png")
         em.add_field(name = "Name:", value = f"{role.name}", inline = False)
         perm = [x for x in role.permissions]
-        em.add_field(name = "Name:", value = f"{perm}",inline = False)
+        em.add_field(name = "Permissions:", value = f"{perm}",inline = False)
         em.set_footer(text = "|Federation|",icon_url = self.bot.user.avatar_url)
         channel_id = 448873236290207744
         channel = self.bot.get_channel(channel_id)
