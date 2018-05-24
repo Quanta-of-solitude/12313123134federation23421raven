@@ -145,7 +145,7 @@ class EventLog:
         channel = self.bot.get_channel(channel_id)
         await channel.send(embed = em)
 
-    async def on_member_join(self, member):
+    async def on_member_remove(self, member):
         '''member removed'''
         em =discord.Embed(color = 0xffd500)
         em.set_author(name = "Member Left:", icon_url = "https://image.ibb.co/jmajRT/Federation.png")
