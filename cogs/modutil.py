@@ -6,6 +6,8 @@ from urllib.parse import urlparse
 import datetime
 import asyncio
 import random
+import myjson
+import json
 import os
 import io
 
@@ -39,7 +41,7 @@ class Mod:
     async def kick(self, ctx, member : discord.Member, *, reason='Please write a reason!'):
 
         '''Kick someone from the server.'''
-        if ctx.author.guild_permissions.administrator == True or ctx.author.guild_permissions.kick_members == True or ctx.message.author.id == 283413165381910539 or ctx.message.author.id == 280271578850263040:
+        if ctx.author.guild_permissions.administrator == True or ctx.author.guild_permissions.kick_members == True or ctx.message.author.id == 280271578850263040:
             try:
                 await ctx.guild.kick(member, reason=reason)
             except:
@@ -66,7 +68,7 @@ class Mod:
     @commands.command()
     async def ban(self, ctx, member : discord.Member, *, reason='Please write a reason!'):
         '''Ban someone from the server.'''
-        if ctx.author.guild_permissions.administrator == True or ctx.author.guild_permissions.ban_members == True or ctx.message.author.id ==280271578850263040 or ctx.message.author.id == 283413165381910539:
+        if ctx.author.guild_permissions.administrator == True or ctx.author.guild_permissions.ban_members == True or ctx.message.author.id ==280271578850263040:
             try:
                 await ctx.guild.ban(member, reason=reason)
             except:
@@ -90,13 +92,13 @@ class Mod:
     @commands.command()
     async def clean(self, ctx, limit : int=15):
         '''Clean a number of bot messages (owners only defined..)'''
-        if ctx.message.author.id == 280271578850263040 or ctx.message.author.id == 283413165381910539:
+        if ctx.message.author.id == 280271578850263040:
             await ctx.purge(limit=limit+1, check=lambda m: m.author == self.bot.user)
 
     @commands.command()
     async def unban(self, ctx, name_or_id, *, reason=None):
         '''Unban someone '''
-        if ctx.author.guild_permissions.administrator == True or ctx.author.guild_permissions.ban_members == True or ctx.message.author.id == 280271578850263040 or ctx.message.author.id == 283413165381910539:
+        if ctx.author.guild_permissions.administrator == True or ctx.author.guild_permissions.ban_members == True or ctx.message.author.id == 280271578850263040:
             ban = await ctx.get_ban(name_or_id)
             try:
                 await ctx.guild.unban(ban.user, reason=reason)
@@ -122,7 +124,7 @@ class Mod:
     @commands.command(aliases=['del','p','prune'])
     async def purge(self, ctx, limit : int, member:discord.Member=None):
         '''Clean a number of messages'''
-        if ctx.author.guild_permissions.administrator == True or ctx.author.guild_permissions.manage_messages == True or ctx.message.author.id == 280271578850263040 or ctx.message.author.id == 283413165381910539:
+        if ctx.author.guild_permissions.administrator == True or ctx.author.guild_permissions.manage_messages == True or ctx.message.author.id == 280271578850263040:
             if member is None:
                 await ctx.purge(limit=limit+1)
             else:
@@ -143,7 +145,7 @@ class Mod:
     @commands.command()
     async def banlist(self, ctx):
         '''See a list of banned users in the guild'''
-        if ctx.author.guild_permissions.administrator == True or ctx.author.guild_permissions.ban_members == True or ctx.message.author.id == 280271578850263040 or ctx.message.author.id == 283413165381910539:
+        if ctx.author.guild_permissions.administrator == True or ctx.author.guild_permissions.ban_members == True or ctx.message.author.id == 280271578850263040:
             try:
                 bans = await ctx.guild.bans()
             except:
@@ -170,7 +172,7 @@ class Mod:
     @commands.command()
     async def baninfo(self, ctx, *, name_or_id):
         '''Check the reason of a ban from the audit logs.'''
-        if ctx.author.guild_permissions.administrator == True or ctx.author.guild_permissions.ban_members == True or ctx.message.author.id == 280271578850263040 or ctx.message.author.id == 283413165381910539:
+        if ctx.author.guild_permissions.administrator == True or ctx.author.guild_permissions.ban_members == True or ctx.message.author.id == 280271578850263040:
             ban = await ctx.get_ban(name_or_id)
             em = discord.Embed()
             em.color = await ctx.get_dominant_color(ban.user.avatar_url)
@@ -195,7 +197,7 @@ class Mod:
     @commands.command(aliases=['adrl','giverole'])
     async def addrole(self, ctx, member: discord.Member, *, rolename: str):
         '''Add a role to someone else.'''
-        if ctx.author.guild_permissions.administrator == True or ctx.author.guild_permissions.manage_roles == True or ctx.message.author.id == 280271578850263040 or ctx.message.author.id == 283413165381910539:
+        if ctx.author.guild_permissions.administrator == True or ctx.author.guild_permissions.manage_roles == True or ctx.message.author.id == 280271578850263040:
             role = discord.utils.find(lambda m: rolename.lower() in m.name.lower(), ctx.message.guild.roles)
             if not role:
                 return await ctx.send('That role does not exist.')
@@ -212,7 +214,7 @@ class Mod:
     @commands.command(aliases=['rmrl','rmrole'])
     async def removerole(self, ctx, member: discord.Member, *, rolename: str):
         '''Remove a role from someone else.'''
-        if ctx.author.guild_permissions.administrator == True or ctx.author.guild_permissions.manage_roles == True or ctx.message.author.id == 280271578850263040 or ctx.message.author.id == 283413165381910539:
+        if ctx.author.guild_permissions.administrator == True or ctx.author.guild_permissions.manage_roles == True or ctx.message.author.id == 280271578850263040:
             role = discord.utils.find(lambda m: rolename.lower() in m.name.lower(), ctx.message.guild.roles)
             if not role:
                 return await ctx.send('`That role does not exist.``')
@@ -228,7 +230,7 @@ class Mod:
     @commands.command()
     async def hackban(self, ctx, userid, *, reason=None):
         '''Ban someone not in the server'''
-        if ctx.author.guild_permissions.administrator == True or ctx.author.guild_permissions.ban_members == True or ctx.message.author.id == 280271578850263040 or ctx.message.author.id == 283413165381910539:
+        if ctx.author.guild_permissions.administrator == True or ctx.author.guild_permissions.ban_members == True or ctx.message.author.id == 280271578850263040:
             try:
                 userid = int(userid)
             except:
@@ -262,7 +264,7 @@ class Mod:
     @commands.command()
     async def mute(self, ctx, member:discord.Member, duration, *, reason=None):
         '''Denies someone from chatting in all text channels and talking in voice channels for a specified duration'''
-        if ctx.author.guild_permissions.administrator == True or ctx.author.guild_permissions.manage_roles == True or ctx.message.author.id == 280271578850263040 or ctx.message.author.id == 283413165381910539:
+        if ctx.author.guild_permissions.administrator == True or ctx.author.guild_permissions.manage_roles == True or ctx.message.author.id == 280271578850263040:
             unit = duration[-1]
             if unit == 's':
                 time = int(duration[:-1])
@@ -313,7 +315,7 @@ class Mod:
     @commands.command()
     async def unmute(self, ctx, member:discord.Member, *, reason=None):
         '''Removes channel overrides for specified member'''
-        if ctx.author.guild_permissions.administrator == True or ctx.author.guild_permissions.manage_roles == True or ctx.message.author.id == 280271578850263040 or ctx.message.author.id == 283413165381910539:
+        if ctx.author.guild_permissions.administrator == True or ctx.author.guild_permissions.manage_roles == True or ctx.message.author.id == 280271578850263040:
             progress = await ctx.send('Unmuting user!')
             try:
                 for channel in ctx.message.guild.channels:
@@ -336,6 +338,92 @@ class Mod:
             em.set_footer(text= '|Federation|')
 
             await ctx.send(embed=em)
+
+    @commands.command()
+    async def warn(self,ctx,member:discord.Member=None,*,reason:str=None):
+        '''warn system'''
+        if ctx.author.guild_permissions.administrator == True or ctx.author.guild_permissions.manage_roles == True or ctx.author.guild_permissions.ban_members == True or ctx.author.guild_permissions.kick_members == True:
+            try:
+                if reason == None:
+                    await ctx.send("**Please Provide a reason!**")
+                    return
+
+                user = member
+                url2 = "{}".format(os.environ.get("warn_logs"))
+                warn = myjson.get(url2)
+                warn = json.loads(warn)
+                if "{}".format(user.id) not in warn:
+                    warn[f"{user.id}"] = {}
+                    warn[f"{user.id}"]["count"] = 1
+                    warn[f"{user.id}"]["name"] = "{}".format(str(user))
+                    warn[f"{user.id}"]["reason"] = str(reason)
+                    url2 = myjson.store(json.dumps(warn),update=url2)
+                else:
+                    warn[f"{user.id}"]["count"] += 1
+                    warn[f"{user.id}"]["name"] = "{}".format(str(user))
+                    warn[f"{user.id}"]["reason"] = str(reason)
+                    url2 = myjson.store(json.dumps(warn),update=url2)
+                em = discord.Embed(color = 0xffd500)
+                notify = ctx.guild.get_member(user_id = int(user.id))
+                em.set_author(name = "Member Warned!", icon_url = "https://image.ibb.co/jmajRT/Federation.png")
+                em.add_field(name = "**Member:** ", value = "**"+str(user)+"**"+ f"\n**ID: {user.id}**",inline = False)
+                em.add_field(name = "**Warned By:**", value = f"**{ctx.author}**", inline = False)
+                em.add_field(name = "**Reason:**", value = "```"+reason+"```", inline = False)
+                em.add_field(name = "**Count:**", value = "{}".format(warn[f"{user.id}"]["count"]), inline = False)
+                channel_id = 386761946688651267
+                channel = self.bot.get_channel(channel_id)
+                await channel.send(embed = em)
+                await ctx.send("`Sent warning to {}, and count recorded.`".format(user),delete_after = 5)
+            except Exception as e:
+                print(e)
+                await ctx.send("`Either can't send warn message to member, or member provided isnt in the server.`")
+
+
+    @commands.command()
+    async def resetcounter(self, ctx, *,uids:str = None):
+        if ctx.author.guild_permissions.administrator == True or ctx.author.guild_permissions.manage_roles == True or ctx.author.guild_permissions.ban_members == True or ctx.author.guild_permissions.kick_members == True:
+            try:
+                url2 = "{}".format(os.environ.get("warn_logs"))
+                warn = myjson.get(url2)
+                warn = json.loads(warn)
+                if uids == None:
+                    await ctx.send("`No member provided`")
+                    return
+                if "{}".format(uids) in warn:
+                    warn[f"{uids}"]["count"] = 0
+                    warn[f"{uids}"]["reason"] = "None"
+                    url2 = myjson.store(json.dumps(warn),update=url2)
+                    await ctx.send("`Warnings reset for {}`".format(warn[f"{uids}"]["name"]))
+                else:
+                    await ctx.send("`No such id in database`")
+            except Exception as e:
+                print(e)
+                await ctx.send("`Couldn't connect to database atm, try again later.`")
+    @commands.command()
+    async def warnlist(self,ctx):
+        if ctx.author.guild_permissions.administrator == True or ctx.author.guild_permissions.manage_roles == True or ctx.author.guild_permissions.ban_members == True or ctx.author.guild_permissions.kick_members == True:
+            try:
+                url2 = "{}".format(os.environ.get("warn_logs"))
+                warn = myjson.get(url2)
+                warn = json.loads(warn)
+                warnlist = []
+                for x in warn:
+
+                    warnlist.append("Count: {}       {}".format(warn[x]["count"],warn[x]["name"]))
+                warnstr = '\n'.join(warnlist)
+                try:
+                    await ctx.send(f"```{warnstr}```")
+                except:
+                    paginated_text = ctx.paginate(warnstr)
+                    for page in paginated_text:
+                        if page == paginated_text[-1]:
+                            out = await ctx.send(f'```\n{page}\n```')
+                            break
+                        await ctx.send(f'```\n{page}\n```')
+
+            except Exception as e:
+                print(e)
+
 
 
 
