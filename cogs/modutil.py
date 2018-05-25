@@ -370,7 +370,7 @@ class Mod:
                 em.add_field(name = "**Warned By:**", value = f"**{ctx.author}**", inline = False)
                 em.add_field(name = "**Reason:**", value = "```"+reason+"```", inline = False)
                 em.add_field(name = "**Count:**", value = "{}".format(warn[f"{user.id}"]["count"]), inline = False)
-                channel_id = 386761946688651267
+                channel_id = 449617657910525953
                 channel = self.bot.get_channel(channel_id)
                 await channel.send(embed = em)
                 await ctx.send("`Sent warning to {}, and count recorded.`".format(user),delete_after = 5)
