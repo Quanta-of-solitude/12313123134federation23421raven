@@ -373,10 +373,10 @@ class Mod:
                 channel_id = 449617657910525953
                 channel = self.bot.get_channel(channel_id)
                 await channel.send(embed = em)
-                await ctx.send("`Sent warning to {}, and count recorded.`".format(user),delete_after = 5)
+                await ctx.send("`Sent warning to {}, and count recorded.`".format(user),delete_after = 7)
             except Exception as e:
                 print(e)
-                await ctx.send("`Either can't send warn message to member, or member provided isnt in the server.`")
+                await ctx.send("`Either can't send warn message to member, or member provided isnt in the server.`", delete_after = 7)
 
 
     @commands.command()
