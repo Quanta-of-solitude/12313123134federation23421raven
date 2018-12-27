@@ -6,7 +6,7 @@ requests
 sympy
 psutil
 bs4
-crasync
+
 cr-py
 urban-async
 moviepy
