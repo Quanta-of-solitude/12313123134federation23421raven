@@ -2,7 +2,7 @@ import discord
 import asyncio
 from discord.ext import commands
 
-class EventLog:
+class EventLog(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
