@@ -5,7 +5,7 @@ TAKEN FROM COG EXAMPLES.
 from discord.ext import commands
 
 
-class OwnerCog:
+class OwnerCog(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
@@ -15,7 +15,7 @@ class OwnerCog:
         
     @commands.command(name='load', hidden=True)
     @commands.check(is_owner)
-    async def cog_load(self, ctx, *, cog: str):
+    async def cload(self, ctx, *, cog: str):
         """load module using cogs.module"""
 
         try:
@@ -27,7 +27,7 @@ class OwnerCog:
 
     @commands.command(name='unload', hidden=True)
     @commands.check(is_owner)
-    async def cog_unload(self, ctx, *, cog: str):
+    async def cunload(self, ctx, *, cog: str):
         """Unload using cogs.module"""
 
         try:
@@ -39,7 +39,7 @@ class OwnerCog:
 
     @commands.command(name='reload', hidden=True)
     @commands.check(is_owner)
-    async def cog_reload(self, ctx, *, cog: str):
+    async def creload(self, ctx, *, cog: str):
         """reload module , use cogs.module"""
 
         try:
