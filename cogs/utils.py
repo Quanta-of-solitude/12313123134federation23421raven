@@ -20,7 +20,7 @@ import io
 import os
 import random
 
-class Utility:
+class Utility(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self._last_embed = None
